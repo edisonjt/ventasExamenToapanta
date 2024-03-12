@@ -19,8 +19,13 @@ public class VentaService {
 
   @Transactional
   public void crear (Venta venta) {
+    try {
+     log.debug("Registrando la venta: {} ", venta.getCodigoUnicoProducto() );
 
+     this.ventaRepository.save(venta);
+     log.info("Se creo la venta: {}", venta);
+    } catch (Exception e) {
+      throw new RuntimeException("Error al crear la venta", e);
+    }
   }
-
-
 }
